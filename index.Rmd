@@ -1,0 +1,19 @@
+---
+title: "3D plot of MDS of reference panel"
+output:
+  bookdown::html_document2:
+    code_folding: hide
+---
+
+```{r include=FALSE, echo=FALSE,message=FALSE,warning=FALSE}
+library(tidyverse)
+library(plotly)
+```
+
+
+```{r}
+#| fig.width=10, fig.asp=0.7
+# load the widget
+load("man/figs/mds3d-merge-clean-cross-impute.RData"); obj
+```
+

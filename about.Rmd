@@ -1,0 +1,8 @@
+---
+title: "About This Plot"
+---
+
+Multi-Dimensional Scaling (MDS) plot based on the 1st 3 components of IBS distance matrix between samples in the reference dataset after merging 1KGP3 and ga100K.
+
+* The markers is colored by the region.
+* The plot is interactive, you can zoom in and out, and hover over the points to see the sample ID.

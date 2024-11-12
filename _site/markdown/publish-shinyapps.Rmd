@@ -1,0 +1,83 @@
+---
+# document info evaluated at snippet insertion
+title: "Publish shinyapps.io"
+author: "Hung Nguyen"
+date: 2024-11-12
+# plotly output require html_document format
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    code_folding: hide
+# params with dynamic value evaluated after knitting
+params:
+  prefix: data/in
+  prefix_out: output/out
+  k: !expr system('echo 5', intern = TRUE)
+---
+
+```{css, echo=FALSE}
+.header-section-number::after {
+  content: ".";
+}
+```
+
+```{r setup, include=FALSE}
+# R Markdown template inside ~/.config/rstudio/templates
+# setup default option for code chunk
+knitr::opts_chunk$set(
+  # extend code folding to any language # work with sh
+  class.source = "foldable",
+  # only include code when it knit to html output
+  echo = knitr::is_html_output(),
+  # set warning=FALSE and message=FALSE when knit to output, can see that in interactive()
+  warning = FALSE, message = FALSE,
+  # set default path to saved figure
+  fig.path = here::here("man/figs/"),
+  # set default device format for figure, we need png for normal behavior in html and pdf for saved  vector format
+  dev = c("png", "pdf")
+)
+```
+
+```{r}
+# set seed for reproducibility
+set.seed(42)
+
+# Load required library
+packages <- c(
+  "tidyverse", # multi-purpose data-wrangling # and ggplot
+  "data.table", # read and write data multi-threading # with easier to remember syntax
+  "janitor", # clean up name 
+  "openxlsx", # handling excel files # with more feature than readxl
+  "paletteer", # common API for multiple color palette
+  "scales", # label (date,time,currency,percentage) and axis break
+  "patchwork", # combine and annotate figure
+  "kableExtra", # print table in a nice way
+  # and extra package for specified project
+  "plotly", "rsconnect"
+)
+
+# load library quietly and stop if library can not be loaded
+for (package in packages) {
+  if (suppressPackageStartupMessages(require(package, character.only = TRUE))) {
+  } else {
+    stop("install required packages before running script")
+  }
+}
+
+# source functions if defined in separate file
+files = c("R/default.fun.R")
+for (file in files) {
+  if (file.exists(file)) {
+    source(file)
+  } else {
+    warning(paste0("file ", file, " not found"))
+  }
+}
+
+# set theme for ggplot
+theme_set(theme_bw())
+```
+
+# Analysis 1
+

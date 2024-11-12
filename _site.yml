@@ -1,0 +1,8 @@
+name: "interactive-plot"
+navbar:
+  title: "interactive plot"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
